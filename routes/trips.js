@@ -9,10 +9,15 @@ const Trip = require("../models/trips");
 //!Attention à la gestion des dates - format ISO8601
 
 router.get('/', function(req, res) {
+
+    let startDate = new Date(req.body.date)
+    let endDate = new Date(startDate)
+    endDate.setDate(startDate.getDate() + 1)
+
     const filter = {
         departure: { $regex: new RegExp(req.body.departure, 'i') },
         arrival: { $regex: new RegExp(req.body.arrival, 'i') },
-        date: { $gt: new Date(req.body.date + "T00:00:00.000Z")}
+        date: { $gt: new Date(req.body.date), $lt : new Date(endDate)} // + "T00:00:00.000Z"
     }
     Trip.find(filter)
     .then(result => 
