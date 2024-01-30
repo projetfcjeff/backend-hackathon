@@ -2,12 +2,18 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+
+//connexion à la DB initiée depuis app.js
 require("./models/connection");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 
 var app = express();
+
+//ajout libraire CORS pour autoriser accès du front
+const cors = require('cors');
+app.use(cors());
 
 app.use(logger("dev"));
 app.use(express.json());
