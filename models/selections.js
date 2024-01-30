@@ -8,6 +8,6 @@ const selectionSchema = mongoose.Schema({
     booked: Boolean,
 });
 
-const Selection = mongoose.model('selections', tripSchema);
+const Selection = mongoose.model('selections', selectionSchemaSchema);
 
 module.exports = Selection;
