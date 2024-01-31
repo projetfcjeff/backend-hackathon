@@ -33,4 +33,8 @@ router.put("/", (req, res) => {
   );
 });
 
+router.delete("/", (req, res) => {
+  Selection.deleteOne({ booked: false }).then(res.json({ deleted: true }));
+});
+
 module.exports = router;
