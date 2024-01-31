@@ -10,14 +10,14 @@ const Trip = require("../models/trips");
 
 router.get('/', function(req, res) {
 
-    let startDate = new Date(req.body.date)
+    let startDate = new Date(req.query.date)
     let endDate = new Date(startDate)
     endDate.setDate(startDate.getDate() + 1)
 
     const filter = {
-        departure: { $regex: new RegExp(req.body.departure, 'i') },
-        arrival: { $regex: new RegExp(req.body.arrival, 'i') },
-        date: { $gt: new Date(req.body.date), $lt : new Date(endDate)} // + "T00:00:00.000Z"
+        departure: { $regex: new RegExp(req.query.departure, 'i') },
+        arrival: { $regex: new RegExp(req.query.arrival, 'i') },
+        date: { $gt: new Date(req.query.date), $lt : new Date(endDate)} // + "T00:00:00.000Z"
     }
     Trip.find(filter)
     .then(result => 
