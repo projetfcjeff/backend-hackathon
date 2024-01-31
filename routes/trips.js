@@ -1,4 +1,4 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 
 const Trip = require("../models/trips");
@@ -34,19 +34,6 @@ router.get('/', function(req, res) {
         }
         )
 
-  const filter = {
-    departure: { $regex: new RegExp(req.body.departure, "i") },
-    arrival: { $regex: new RegExp(req.body.arrival, "i") },
-    date: { $gt: new Date(req.body.date), $lt: new Date(endDate) }, // + "T00:00:00.000Z"
-  };
-  Trip.find(filter).then((result) => {
-    if (result.length > 0) {
-      res.json({
-        status: 200,
-        result: result,
-      });
-    } else res.json({ status: 400, result: false, error: "Trip not found" });
-  });
 });
 
 module.exports = router;
