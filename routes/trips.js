@@ -15,8 +15,8 @@ router.get('/', function(req, res) {
     endDate.setDate(startDate.getDate() + 1)
 
     const filter = {
-        departure: { $regex: new RegExp(req.query.departure, 'i') },
-        arrival: { $regex: new RegExp(req.query.arrival, 'i') },
+        departure: { $regex: new RegExp(`^${req.query.departure}$`, 'i') },
+        arrival: { $regex: new RegExp(`^${req.query.arrival}$`, 'i') },
         date: { $gt: new Date(req.query.date), $lt : new Date(endDate)} // + "T00:00:00.000Z"
     }
     Trip.find(filter)
